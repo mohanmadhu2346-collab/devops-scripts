@@ -9,3 +9,6 @@ A collection of production-ready Bash automation and monitoring scripts.
 3. `service_checker.sh` - Multi-target ping and reachability audit script with formatted terminal output.
 4. `log_splitter.sh` - Demonstrates standard I/O streams and file descriptor redirection (`stdout` vs `stderr`).
 5. `parse_services.sh` - Cloud service health monitor parsing nested JSON payloads using `jq`.
+3. `service_checker.sh` - Multi-target ping and reachability audit script with formatted terminal output.
+4. `log_splitter.sh` - Demonstrates standard I/O streams and file descriptor redirection (`stdout` vs `stderr`).
+5. `parse_services.sh` - Cloud service health monitor parsing nested JSON payloads using `jq`.
