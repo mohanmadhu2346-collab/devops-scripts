@@ -1,13 +1,11 @@
-name: DevOps Scripts CI
+name: DevOps Scripts CI/CD
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-  validate-and-test:
+  build-test-publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,3 +24,18 @@ jobs:
       - name: Run cluster audit script
         run: |
           ./inspect_cluster.sh staging
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/devops-suite:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/devops-suite:${{ github.sha }}
